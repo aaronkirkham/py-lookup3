@@ -4,8 +4,7 @@
 #include <string.h>
 #include "lookup3.h"
 
-static PyObject *
-lookup3_hashlittle(PyObject *self, PyObject *args)
+static PyObject* lookup3_hashlittle(PyObject *self, PyObject *args)
 {
 	const char *string;
 	uint32_t hash;
@@ -26,11 +25,27 @@ static PyMethodDef lookup3_methods[] = {
 		{"hashlittle", (PyCFunction)lookup3_hashlittle,
 		 METH_VARARGS | METH_KEYWORDS,
 		 "Returns a hash based on lookup3 little hash"},
-		{NULL, NULL, 0, NULL}	 /* sentinel */
+		{NULL}	 /* sentinel */
 };
 
-void
+#if PY_MAJOR_VERSION >= 3
+static struct PyModuleDef lookup3_moddef =
+{
+  PyModuleDef_HEAD_INIT,
+  "lookup3", "",
+  -1,
+  lookup3_methods
+};
+
+PyMODINIT_FUNC
+PyInit_lookup3(void)
+{
+  return PyModule_Create(&lookup3_moddef);
+}
+#else
+PyMODINIT_FUNC
 initlookup3(void)
 {
-	Py_InitModule("lookup3", lookup3_methods);
+  Py_InitModule("lookup3", lookup3_methods);
 }
+#endif
