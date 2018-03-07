@@ -18,34 +18,34 @@ static PyObject* lookup3_hashlittle(PyObject *self, PyObject *args)
 }
 
 static PyMethodDef lookup3_methods[] = {
-		/* The cast of the function is necessary since PyCFunction values
-		 * only take two PyObject* parameters, and keywdarg_parrot() takes
-		 * three.
-		 */
-		{"hashlittle", (PyCFunction)lookup3_hashlittle,
-		 METH_VARARGS | METH_KEYWORDS,
-		 "Returns a hash based on lookup3 little hash"},
-		{NULL}	 /* sentinel */
+    /* The cast of the function is necessary since PyCFunction values
+	    * only take two PyObject* parameters, and keywdarg_parrot() takes
+	    * three.
+	    */
+    {"hashlittle", (PyCFunction)lookup3_hashlittle,
+        METH_VARARGS | METH_KEYWORDS,
+        "Returns a hash based on lookup3 little hash"},
+    {NULL}
 };
 
 #if PY_MAJOR_VERSION >= 3
 static struct PyModuleDef lookup3_moddef =
 {
-  PyModuleDef_HEAD_INIT,
-  "lookup3", "",
-  -1,
-  lookup3_methods
+    PyModuleDef_HEAD_INIT,
+    "lookup3", "",
+    -1,
+    lookup3_methods
 };
 
 PyMODINIT_FUNC
 PyInit_lookup3(void)
 {
-  return PyModule_Create(&lookup3_moddef);
+    return PyModule_Create(&lookup3_moddef);
 }
 #else
 PyMODINIT_FUNC
 initlookup3(void)
 {
-  Py_InitModule("lookup3", lookup3_methods);
+    Py_InitModule("lookup3", lookup3_methods);
 }
 #endif
